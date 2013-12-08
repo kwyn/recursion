@@ -37,16 +37,18 @@ var stringifyJSON = function (obj) {
       var keys = Object.keys(obj);
       //if not empty iterate and make function string to recurse to stringyJSON with object keys and values
       var struct = " '{' ";
-      for(var i = 0; i < keys.length; i++){
+      for(var i = 0; i < keys.length ; i++){
         struct += "+ '\""+keys[i]+"\":'+ stringifyJSON(obj[\""+keys[i]+"\"])";
         if( i < keys.length-1 ){
           struct += "+ ',' ";
         }else{
           struct += "+ '}'";
         }
-        //recursive call
-        return eval(struct);
+      
       }
+    //recusrive call
+    console.log(struct);
+    return eval(struct);
     //if empty object return '{}'
     //end case
     }else{
