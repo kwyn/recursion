@@ -38,13 +38,18 @@ var stringifyJSON = function (obj) {
       //if not empty iterate and make function string to recurse to stringyJSON with object keys and values
       var struct = " '{' ";
       for(var i = 0; i < keys.length ; i++){
-        struct += "+ '\""+keys[i]+"\":'+ stringifyJSON(obj[\""+keys[i]+"\"])";
-        if( i < keys.length-1 ){
-          struct += "+ ',' ";
+        if( (obj[keys[i]] == undefined && obj[keys[i]] !== null) || typeof obj[keys[i]] == "function" ){
+          struct += " + stringifyJSON(obj[\""+keys[i]+"\"])";
         }else{
-          struct += "+ '}'";
+          struct += "+ '\""+keys[i]+"\":'+ stringifyJSON(obj[\""+keys[i]+"\"])";
+          if( i < keys.length-1 ){
+            struct += "+ ',' ";
+          }
         }
-      
+        if( i == keys.length-1){
+          struct += "+'}'";
+        }
+        
       }
     //recusrive call
     console.log(struct);
@@ -54,6 +59,10 @@ var stringifyJSON = function (obj) {
     }else{
       return "{}";
     }
+  }else if(typeof obj == "function"){
+    return "";
+  }else if(obj == undefined){
+    return "";
   //check if obj is a number
   }else if(typeof obj == "number"){
     //end case
