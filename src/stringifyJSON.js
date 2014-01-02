@@ -52,7 +52,6 @@ var stringifyJSON = function (obj) {
         
       }
     //recusrive call
-    console.log(struct);
     return eval(struct);
     //if empty object return '{}'
     //end case
